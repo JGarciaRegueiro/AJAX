@@ -1,0 +1,22 @@
+{
+    "ingredientes": {
+        "ingrediente": [
+            {
+                "nombre": "Tomate",
+                "precio": "1"
+            },
+            {
+                "nombre": "Queso",
+                "precio": "2"
+            },
+            {
+                "nombre": "Bacon",
+                "precio": "3"
+            },
+            {
+                "nombre": "Atún",
+                "precio": "4"
+            }
+        ]
+    }
+}
