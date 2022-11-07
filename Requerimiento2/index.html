@@ -1,0 +1,43 @@
+<!--FORMULARIO DE ALTA DEL PEDIDO DE UNA PIZZA-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Pedir una pizza</title>
+</head>
+<body>
+    <img src="img/logopizza.png" alt="logo_pizza">
+    <!-- Comienzo del formulario. Dentro de la etiqueta <form>. 
+    Atributo action determina donde se envían los datos recopilados, una vez que se pulse al boton submit -->
+    <form action="">
+        <input type="text" id="nombre" placeholder="Nombre" autofocus>
+        <input type="text" id="direccion" placeholder="Dirección">
+        <input type="text" id="telefono" placeholder="Teléfono">
+        <input type="text" id="email" placeholder="Email">
+
+        <fieldset>
+            <legend>Tamaño:</legend>
+            <!--Input type: radio "boton de radio".Los botones tienen el mismo NAME = al mismo grupo, pero el usuario solo podrá seleccionar un boton: EXCLUYENTE. CHECKED (atributo marcado, casilla verificacion preseleccionada)-->
+            <label><input type="radio" id="pequena" name="tamaño" value="pequeña" checked>Pequeña (5€)</label>
+            <label><input type="radio" id="mediana" name="tamaño" value="mediana">Mediana (10€)</label>
+            <label><input type="radio" id="grande" name="tamaño" value="grande">Grande (15€)</label>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Ingredientes:</legend>
+            <!--Imput type: Checkbox, "casilla de verificacion", usuario podrá marcar y desmarcar. MULTIPLES OPCIONES-->     
+            <label><input type="checkbox" id="ingrediente1" name="ingrediente" value="Tomate" checked>Tomate (1€)</label>
+            <label><input type="checkbox" id="ingrediente2" name="ingrediente" value="Queso">Queso (1€)</label>
+            <label><input type="checkbox" id="ingrediente3" name="ingrediente" value="Bacon">Bacon (1€)</label>
+            <label><input type="checkbox" id="ingrediente4" name="ingrediente" value="Atún">Atún (1€)</label>
+        </fieldset>
+        
+        <!--Input type submit: "boton-entregar-enviar",el usuario hace click, realiza la petición al programa servidor especificado en action-->
+        <input type="submit" value="Procesar el pedido" onclick="return calcularPrecio()">
+    </form>
+    <script type= "text/javascript" src="pizza.js"></script>
+</body>
+</html>
