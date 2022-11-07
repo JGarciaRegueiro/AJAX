@@ -1,0 +1,56 @@
+:root {
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+/* Globales */
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,*:before,*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: rgb(248, 147, 147);
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width : 1080px) {
+    form {
+        margin: 2rem 30rem;
+    }
+}
+
+form * {
+    padding: .5rem;
+    margin: .5rem;
+    border-radius: .5rem;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+legend {
+    font-size: 1.5rem;
+}
+
+img {
+    height: 20rem;
+    width: 20rem;
+    padding: 2rem;
+}
+
+input[type=submit]{
+    background-color: rgb(104, 158, 104);
+    color: white;
+    margin: 2rem 8rem;
+}
