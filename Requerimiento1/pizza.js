@@ -1,3 +1,77 @@
+const URL_DESTINO = "http://localhost:5500/Requerimiento1/json/"
+const RECURSO = "datos.json"
+
+    function enviarPeticionAsincrona() {
+        let xmlHttp = new XMLHttpRequest()
+
+        xmlHttp.onreadystatechange = function(){
+            if (this.readyState == 4){
+                if (this.status == 200){
+                    procesarRespuesta(this.responseText)
+                } else {
+                    alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
+                }
+            }
+        }
+
+        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
+        xmlHttp.send(null)
+    }
+
+    function procesarRespuesta(jsonDoc) {
+        var objetoJson = JSON.parse(jsonDoc);
+        var arrayTamaños = objetoJson.datos.tamaño;
+
+        for (let tam of arrayTamaños){
+            var fieldset = document.getElementById("tamaños");
+            var textoAMostrar = tam.tamaño + " " + tam.precio + "€";
+
+            //Radio
+            //Crear nodo de tipo Element labelRadio1
+            var labelRadio = document.createElement("label");
+            //Añadir el nodo Element labelRadio1 como hijo del nodo Element fieldset
+            fieldset.appendChild(labelRadio);
+            //Crear nodo de tipo Element radio1
+            var radio = document.createElement("input");
+            radio.type = "radio";   
+            radio.name = "tamaño";   
+            radio.id = tam.tamaño;   
+            radio.value = tam.tamaño;
+            //Añadir el nodo Element radio1 como hijo del nodo Element labelRadio1
+            labelRadio.appendChild(radio);
+            //Crear nodo de tipo Text textoRadio1
+            var textoRadio = document.createTextNode(textoAMostrar);
+            //Añadir el nodo Texto textoRadio1 como hijo del nodo Element labelRadio1
+            labelRadio.appendChild(textoRadio);
+        }
+
+        var arrayIngredientes = objetoJson.datos.ingrediente;
+
+        for (let ing of arrayIngredientes){
+            var fieldset = document.getElementById("ingredientes");
+            var textoAMostrar = ing.nombre + " " + ing.precio + "€";
+
+            //Radio
+            //Crear nodo de tipo Element labelRadio1
+            var labelRadio = document.createElement("label");
+            //Añadir el nodo Element labelRadio1 como hijo del nodo Element fieldset
+            fieldset.appendChild(labelRadio);
+            //Crear nodo de tipo Element radio1
+            var radio = document.createElement("input");
+            radio.type = "checkbox";   
+            radio.name = "ingrediente";   
+            radio.id = ing.nombre;   
+            radio.value = ing.nombre;
+            //Añadir el nodo Element radio1 como hijo del nodo Element labelRadio1
+            labelRadio.appendChild(radio);
+            //Crear nodo de tipo Text textoRadio1
+            var textoRadio = document.createTextNode(textoAMostrar);
+            //Añadir el nodo Texto textoRadio1 como hijo del nodo Element labelRadio1
+            labelRadio.appendChild(textoRadio);
+        }
+
+    }
+
 var nombre = document.getElementById("nombre");
 var direccion = document.getElementById("direccion");
 var telefono = document.getElementById("telefono");
@@ -82,15 +156,15 @@ function calcularPrecio (){
             }
         }
         //SI ES 'pequeña' SUMA 5€ AL PRECIO TOTAL
-        if (precioPorTamaño == 'pequeña'){
+        if (precioPorTamaño == 'Pequeña'){
             precio=precio+5;
         }
         //SI ES 'mediana' SUMA 10€ AL PRECIO TOTAL
-        if (precioPorTamaño == 'mediana'){
+        if (precioPorTamaño == 'Mediana'){
             precio=precio+10;
         }
         //SI ES 'grande' SUMA 15€ AL PRECIO TOTAL
-        if (precioPorTamaño == 'grande'){
+        if (precioPorTamaño == 'Grande'){
             precio=precio+15;
         }
         for (h=0; h<ingrediente.length;h++){
