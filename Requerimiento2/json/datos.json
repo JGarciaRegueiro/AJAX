@@ -3,33 +3,33 @@
         "ingrediente": [
             {
                 "nombre": "Tomate",
-                "precio": "1"
+                "precio": 1
             },
             {
                 "nombre": "Queso",
-                "precio": "1"
+                "precio": 2
             },
             {
                 "nombre": "Bacon",
-                "precio": "1"
+                "precio": 3
             },
             {
                 "nombre": "Atún",
-                "precio": "1"
+                "precio": 4
             }
         ],
         "tamaño": [
             {
                 "tamaño": "Pequeña",
-                "precio": "5"
+                "precio": 5
             },
             {
                 "tamaño": "Mediana",
-                "precio": "10"
+                "precio": 10
             },
             {
                 "tamaño": "Grande",
-                "precio": "15"
+                "precio": 15
             }
         ]
     }

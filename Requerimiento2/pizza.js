@@ -1,4 +1,4 @@
-const URL_DESTINO = "http://localhost:5500/Requerimiento1/json/"
+const URL_DESTINO = "http://localhost:5500/Requerimiento2/json/"
 const RECURSO = "datos.json"
 
     function enviarPeticionAsincrona() {
@@ -22,7 +22,7 @@ const RECURSO = "datos.json"
         var objetoJson = JSON.parse(jsonDoc);
         var arrayTamaños = objetoJson.datos.tamaño;
 
-        for (let tam of arrayTamaños){
+        for (var tam of arrayTamaños){
             var fieldset = document.getElementById("tamaños");
             var textoAMostrar = tam.tamaño + " " + tam.precio + "€";
 
@@ -44,10 +44,10 @@ const RECURSO = "datos.json"
             //Añadir el nodo Texto textoRadio1 como hijo del nodo Element labelRadio1
             labelRadio.appendChild(textoRadio);
         }
-
+        
         var arrayIngredientes = objetoJson.datos.ingrediente;
 
-        for (let ing of arrayIngredientes){
+        for (var ing of arrayIngredientes){
             var fieldset = document.getElementById("ingredientes");
             var textoAMostrar = ing.nombre + " " + ing.precio + "€";
 
@@ -69,7 +69,6 @@ const RECURSO = "datos.json"
             //Añadir el nodo Texto textoRadio1 como hijo del nodo Element labelRadio1
             labelRadio.appendChild(textoRadio);
         }
-
     }
 
 var nombre = document.getElementById("nombre");
@@ -148,34 +147,55 @@ function validar (){
  * */ 
 function calcularPrecio (){
     //COMPROBAMOS QUE LA FUNCIÓN VALIDAR SE HA REALIZADO CORRECTAMENTE
-    if (validar ()){
-        for (k=0; k<tamaño.length;k++){
-            //SE CHEQUEA EL TAMAÑO DE LA PIZZA ELEGIDA, Y GUARDAMOS SU VALUE "pequeña,mediana o grande" EN LA VARIABLE precioPorTamaño
-            if (tamaño[k].checked){
-                var precioPorTamaño = tamaño[k].value;
+    if (validar ()){   
+        
+        let xmlHttp = new XMLHttpRequest()
+
+        xmlHttp.onreadystatechange = function(){
+            if (this.readyState == 4){
+                if (this.status == 200){
+                    procesarRespuesta2(this.responseText)
+                } else {
+                    alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
+                }
             }
         }
-        //SI ES 'pequeña' SUMA 5€ AL PRECIO TOTAL
-        if (precioPorTamaño == 'Pequeña'){
-            precio=precio+5;
-        }
-        //SI ES 'mediana' SUMA 10€ AL PRECIO TOTAL
-        if (precioPorTamaño == 'Mediana'){
-            precio=precio+10;
-        }
-        //SI ES 'grande' SUMA 15€ AL PRECIO TOTAL
-        if (precioPorTamaño == 'Grande'){
-            precio=precio+15;
-        }
-        for (h=0; h<ingrediente.length;h++){
-            //SE CHEQUEAN CUANTOS INGREDIENTE DE LA PIZZA SE HAN ELEGIDO, POR CADA INGREDIENTE ELEGIDO SE SUMA 1€ AL PRECIO TOTAL
-            if (ingrediente[h].checked){
-                precio=precio+1;
+       
+        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, false)
+        xmlHttp.send(null)
+        
+        function procesarRespuesta2(jsonDoc){
+            var objetoJson = JSON.parse(jsonDoc);
+            var arrayTamaños = objetoJson.datos.tamaño;
+            var arrayIngredientes = objetoJson.datos.ingrediente;
+        
+            for (k=0; k<tamaño.length;k++){
+                //SE CHEQUEA EL TAMAÑO DE LA PIZZA ELEGIDA, Y GUARDAMOS SU VALUE "pequeña,mediana o grande" EN LA VARIABLE precioPorTamaño
+                if (tamaño[k].checked){
+                    var precioPorTamaño = tamaño[k].value;
+                }
             }
+            for (var tam of arrayTamaños){
+                //SI ES 'pequeña' SUMA 5€ AL PRECIO TOTAL
+                if (precioPorTamaño == tam.tamaño){
+                    precio=precio+tam.precio;
+                } 
+            }
+            for (h=0; h<ingrediente.length;h++){
+                if (ingrediente[h].checked ){
+                    var precioPorIngrediente=ingrediente[h].value;
+                    for (var ing of arrayIngredientes){
+                        if (precioPorIngrediente == ing.nombre){
+                            precio=precio+ing.precio;
+                        } 
+                    }
+                }
+            }              
         }
+        
         //AL FINALIZAR SE DEVUELVE UNA ALERTA CON EL PRECIO TOTAL DEL PEDIDO.
         alert("El precio total del pedido es " + precio +"€") 
     }
     //Esta línea nos permite controlar si ante un campo vacío se tiene que refrescar el formulario o mantener los datos a la espera de introducir los correctos
-   else return false
+    else return false
 }
