@@ -1,0 +1,36 @@
+{
+    "datos": {
+        "ingrediente": [
+            {
+                "nombre": "Tomate",
+                "precio": "1"
+            },
+            {
+                "nombre": "Queso",
+                "precio": "1"
+            },
+            {
+                "nombre": "Bacon",
+                "precio": "1"
+            },
+            {
+                "nombre": "Atún",
+                "precio": "1"
+            }
+        ],
+        "tamaño": [
+            {
+                "tamaño": "Pequeña",
+                "precio": "5"
+            },
+            {
+                "tamaño": "Mediana",
+                "precio": "10"
+            },
+            {
+                "tamaño": "Grande",
+                "precio": "15"
+            }
+        ]
+    }
+}
