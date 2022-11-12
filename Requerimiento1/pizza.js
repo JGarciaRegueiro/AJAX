@@ -1,18 +1,23 @@
 const URL_DESTINO = "http://localhost:5500/Requerimiento1/json/"
 const RECURSO = "datos.json"
 
+//Funcion AJAX que podemos usar en la mayoría de los casos
 function enviarPeticionAsincrona() {
     let xmlHttp = new XMLHttpRequest()
    
+    //Ejecutamos la función open
     xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
+    //Ejecutamos la función send, a null ya que el método utilizado es 'GET'
     xmlHttp.send()
 
+    //Esta función de callback se ejecutará cuando se haya procesado la respuesta HTTP
     xmlHttp.onload = function(){
         procesarRespuesta(this.responseText)
     }
 
+    //Se ejecutará si hay algún error
     xmlHttp.onerror = function(){
-        alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
+        alert("ERROR")
     }
 }
 
