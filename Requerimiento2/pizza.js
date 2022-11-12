@@ -186,11 +186,11 @@ function calcularPrecio (){
                         } 
                     }
                 }
-            }              
+            } 
+            
+            //AL FINALIZAR SE DEVUELVE UNA ALERTA CON EL PRECIO TOTAL DEL PEDIDO.
+            alert("El precio total del pedido es " + precio +"€") 
         }
-        
-        //AL FINALIZAR SE DEVUELVE UNA ALERTA CON EL PRECIO TOTAL DEL PEDIDO.
-        alert("El precio total del pedido es " + precio +"€") 
     }
     //Esta línea nos permite controlar si ante un campo vacío se tiene que refrescar el formulario o mantener los datos a la espera de introducir los correctos
     else return false
