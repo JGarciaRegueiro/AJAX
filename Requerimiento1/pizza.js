@@ -3,12 +3,15 @@ const RECURSO = "datos.json"
 
 //Funcion AJAX que podemos usar en la mayoría de los casos
 function enviarPeticionAsincrona() {
+    
+    //Formamos el objeto XMLHttpRequest
     let xmlHttp = new XMLHttpRequest()
    
-    //Ejecutamos la función open
+    //xmlHttp.open (método (str), url (str), asíncrono/síncrono (true/false) )
     xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
-    //Ejecutamos la función send, a null ya que el método utilizado es 'GET'
-    xmlHttp.send()
+    xmlHttp.send()//Lo que queremos que vaya en el BODY del mensaje HTTP REQUEST
+                  //lo pasamos como parámetro a la función send, en este caso nada
+                  //ya que GET no debe llevar BODY
 
     //Esta función de callback se ejecutará cuando se haya procesado la respuesta HTTP
     xmlHttp.onload = function(){
@@ -21,16 +24,17 @@ function enviarPeticionAsincrona() {
     }
 }
 
-    function procesarRespuesta(jsonDoc) {
-        var objetoJson = JSON.parse(jsonDoc);
-        var arrayTamaños = objetoJson.datos.tamaño;
+//Funcion que cargará de manera dinámica parte de los datos, concretamente de los tamaños e ingredientes de la pizza
+function procesarRespuesta(jsonDoc) {
+    var objetoJson = JSON.parse(jsonDoc);
+    var arrayTamaños = objetoJson.datos.tamaño;
 
-        for (let tam of arrayTamaños){
-            var fieldset = document.getElementById("tamaños");
-            var textoAMostrar = tam.tamaño + " " + tam.precio + "€";
+    for (let tam of arrayTamaños){
+        var fieldset = document.getElementById("tamaños");
+        var textoAMostrar = tam.tamaño + " " + tam.precio + "€";
 
-            //Radio
-            //Crear nodo de tipo Element labelRadio1
+        //Radio
+        //Crear nodo de tipo Element labelRadio1
             var labelRadio = document.createElement("label");
             //Añadir el nodo Element labelRadio1 como hijo del nodo Element fieldset
             fieldset.appendChild(labelRadio);
