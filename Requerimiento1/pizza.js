@@ -3,7 +3,7 @@ const RECURSO = "datos.json"
 
 //Funcion AJAX que podemos usar en la mayoría de los casos
 function enviarPeticionAsincrona() {
-    
+
     //Formamos el objeto XMLHttpRequest
     let xmlHttp = new XMLHttpRequest()
    
@@ -26,7 +26,10 @@ function enviarPeticionAsincrona() {
 
 //Funcion que cargará de manera dinámica parte de los datos, concretamente de los tamaños e ingredientes de la pizza
 function procesarRespuesta(jsonDoc) {
+    //Convertimos respuesta 'jsonDoc' a objeto de tipo JSON
     var objetoJson = JSON.parse(jsonDoc);
+
+    //Guardamos en arrayTamaños, los datos del objeto JSON correspondiente a tamaño
     var arrayTamaños = objetoJson.datos.tamaño;
 
     for (let tam of arrayTamaños){
@@ -34,24 +37,25 @@ function procesarRespuesta(jsonDoc) {
         var textoAMostrar = tam.tamaño + " " + tam.precio + "€";
 
         //Radio
-        //Crear nodo de tipo Element labelRadio1
+        //Crear nodo de tipo Element labelRadio
             var labelRadio = document.createElement("label");
-            //Añadir el nodo Element labelRadio1 como hijo del nodo Element fieldset
+            //Añadir el nodo Element labelRadio como hijo del nodo Element fieldset
             fieldset.appendChild(labelRadio);
-            //Crear nodo de tipo Element radio1
+            //Crear nodo de tipo Element radio
             var radio = document.createElement("input");
             radio.type = "radio";   
             radio.name = "tamaño";   
             radio.id = tam.tamaño;   
             radio.value = tam.tamaño;
-            //Añadir el nodo Element radio1 como hijo del nodo Element labelRadio1
+            //Añadir el nodo Element radio como hijo del nodo Element labelRadio
             labelRadio.appendChild(radio);
             //Crear nodo de tipo Text textoRadio1
             var textoRadio = document.createTextNode(textoAMostrar);
-            //Añadir el nodo Texto textoRadio1 como hijo del nodo Element labelRadio1
+            //Añadir el nodo Texto textoRadio como hijo del nodo Element labelRadio
             labelRadio.appendChild(textoRadio);
         }
 
+        //Guardamos en arrayIngredientes, los datos del objeto JSON correspondiente a ingrediente
         var arrayIngredientes = objetoJson.datos.ingrediente;
 
         for (let ing of arrayIngredientes){
@@ -59,21 +63,21 @@ function procesarRespuesta(jsonDoc) {
             var textoAMostrar = ing.nombre + " " + ing.precio + "€";
 
             //Radio
-            //Crear nodo de tipo Element labelRadio1
+            //Crear nodo de tipo Element labelRadio
             var labelRadio = document.createElement("label");
-            //Añadir el nodo Element labelRadio1 como hijo del nodo Element fieldset
+            //Añadir el nodo Element labelRadio como hijo del nodo Element fieldset
             fieldset.appendChild(labelRadio);
-            //Crear nodo de tipo Element radio1
+            //Crear nodo de tipo Element radio
             var radio = document.createElement("input");
             radio.type = "checkbox";   
             radio.name = "ingrediente";   
             radio.id = ing.nombre;   
             radio.value = ing.nombre;
-            //Añadir el nodo Element radio1 como hijo del nodo Element labelRadio1
+            //Añadir el nodo Element radio como hijo del nodo Element labelRadio
             labelRadio.appendChild(radio);
-            //Crear nodo de tipo Text textoRadio1
+            //Crear nodo de tipo Text textoRadio
             var textoRadio = document.createTextNode(textoAMostrar);
-            //Añadir el nodo Texto textoRadio1 como hijo del nodo Element labelRadio1
+            //Añadir el nodo Texto textoRadio como hijo del nodo Element labelRadio
             labelRadio.appendChild(textoRadio);
         }
 
