@@ -150,7 +150,7 @@ function calcularPrecio (){
         let xmlHttp = new XMLHttpRequest()
        
         xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
-        xmlHttp.send(null)
+        xmlHttp.send()
 
         xmlHttp.onload = function(){
             procesarRespuesta2(this.responseText)
