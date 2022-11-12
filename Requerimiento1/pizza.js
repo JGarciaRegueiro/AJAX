@@ -1,22 +1,20 @@
 const URL_DESTINO = "http://localhost:5500/Requerimiento1/json/"
 const RECURSO = "datos.json"
 
-    function enviarPeticionAsincrona() {
-        let xmlHttp = new XMLHttpRequest()
+function enviarPeticionAsincrona() {
+    let xmlHttp = new XMLHttpRequest()
+   
+    xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
+    xmlHttp.send()
 
-        xmlHttp.onreadystatechange = function(){
-            if (this.readyState == 4){
-                if (this.status == 200){
-                    procesarRespuesta(this.responseText)
-                } else {
-                    alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
-                }
-            }
-        }
-
-        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
-        xmlHttp.send(null)
+    xmlHttp.onload = function(){
+        procesarRespuesta(this.responseText)
     }
+
+    xmlHttp.onerror = function(){
+        alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
+    }
+}
 
     function procesarRespuesta(jsonDoc) {
         var objetoJson = JSON.parse(jsonDoc);

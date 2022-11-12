@@ -3,19 +3,17 @@ const RECURSO = "datos.json"
 
     function enviarPeticionAsincrona() {
         let xmlHttp = new XMLHttpRequest()
+       
+        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
+        xmlHttp.send()
 
-        xmlHttp.onreadystatechange = function(){
-            if (this.readyState == 4){
-                if (this.status == 200){
-                    procesarRespuesta(this.responseText)
-                } else {
-                    alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
-                }
-            }
+        xmlHttp.onload = function(){
+            procesarRespuesta(this.responseText)
         }
 
-        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
-        xmlHttp.send(null)
+        xmlHttp.onerror = function(){
+            alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
+        }
     }
 
     function procesarRespuesta(jsonDoc) {
@@ -150,19 +148,17 @@ function calcularPrecio (){
     if (validar ()){   
         
         let xmlHttp = new XMLHttpRequest()
-
-        xmlHttp.onreadystatechange = function(){
-            if (this.readyState == 4){
-                if (this.status == 200){
-                    procesarRespuesta2(this.responseText)
-                } else {
-                    alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
-                }
-            }
-        }
        
-        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, false)
+        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
         xmlHttp.send(null)
+
+        xmlHttp.onload = function(){
+            procesarRespuesta2(this.responseText)
+        }
+
+        xmlHttp.onerror = function(){
+            alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
+        }
         
         function procesarRespuesta2(jsonDoc){
             var objetoJson = JSON.parse(jsonDoc);
