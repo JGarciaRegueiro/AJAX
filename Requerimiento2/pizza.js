@@ -1,23 +1,35 @@
 const URL_DESTINO = "http://localhost:5500/Requerimiento2/json/"
 const RECURSO = "datos.json"
 
+    //Funcion AJAX que podemos usar en la mayoría de los casos
     function enviarPeticionAsincrona() {
+        
+        //Formamos el objeto XMLHttpRequest
         let xmlHttp = new XMLHttpRequest()
-       
-        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
-        xmlHttp.send()
 
+        //xmlHttp.open (método (str), url (str), asíncrono/síncrono (true/false) )
+        xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
+        xmlHttp.send()//Lo que queremos que vaya en el BODY del mensaje HTTP REQUEST
+                      //lo pasamos como parámetro a la función send, en este caso nada
+                      //ya que GET no debe llevar BODY
+
+        //Esta función de callback se ejecutará cuando se haya procesado la respuesta HTTP
         xmlHttp.onload = function(){
             procesarRespuesta(this.responseText)
         }
 
+        //Se ejecutará si hay algún error
         xmlHttp.onerror = function(){
             alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
         }
     }
 
+    //Funcion que cargará de manera dinámica parte de los datos, concretamente de los tamaños e ingredientes de la pizza
     function procesarRespuesta(jsonDoc) {
+        //Convertimos respuesta 'jsonDoc' a objeto de tipo JSON
         var objetoJson = JSON.parse(jsonDoc);
+
+        //Guardamos en arrayTamaños, los datos del objeto JSON correspondiente a tamaño
         var arrayTamaños = objetoJson.datos.tamaño;
 
         for (var tam of arrayTamaños){
@@ -43,6 +55,7 @@ const RECURSO = "datos.json"
             labelRadio.appendChild(textoRadio);
         }
         
+        //Guardamos en arrayIngredientes, los datos del objeto JSON correspondiente a ingrediente
         var arrayIngredientes = objetoJson.datos.ingrediente;
 
         for (var ing of arrayIngredientes){
@@ -141,21 +154,30 @@ function validar (){
  * -->5€ para la pizza pequeña
  * -->10€ para la pizza mediana
  * -->15€ para la pizza grande
- * -->Cada ingrediente elegido tendrá un valor de 1€
+ * -->1€ para el Tomate
+ * -->2€ para el Queso
+ * -->3€ para el Bacon
+ * -->4€ para el Atún
  * */ 
 function calcularPrecio (){
     //COMPROBAMOS QUE LA FUNCIÓN VALIDAR SE HA REALIZADO CORRECTAMENTE
     if (validar ()){   
         
+        //Formamos el objeto XMLHttpRequest
         let xmlHttp = new XMLHttpRequest()
        
+        //xmlHttp.open (método (str), url (str), asíncrono/síncrono (true/false) )
         xmlHttp.open ('GET', URL_DESTINO +  RECURSO, true)
-        xmlHttp.send()
+        xmlHttp.send()//Lo que queremos que vaya en el BODY del mensaje HTTP REQUEST
+                      //lo pasamos como parámetro a la función send, en este caso nada
+                      //ya que GET no debe llevar BODY
 
+        //Esta función de callback se ejecutará cuando se haya procesado la respuesta HTTP
         xmlHttp.onload = function(){
             procesarRespuesta2(this.responseText)
         }
-
+            
+        //Se ejecutará si hay algún error
         xmlHttp.onerror = function(){
             alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
         }
@@ -178,9 +200,11 @@ function calcularPrecio (){
                 } 
             }
             for (h=0; h<ingrediente.length;h++){
+                //SE CHEQUEA EL INGREDIENTE ELEGIDO, Y GUARDAMOS SU VALUE "Tomate,Queso,Bacon,Atún" en la variable precioPorIngrediente
                 if (ingrediente[h].checked ){
                     var precioPorIngrediente=ingrediente[h].value;
                     for (var ing of arrayIngredientes){
+                        //Según el nombre del ingrediente se le suma el precio correspondiente de ese ingrediente
                         if (precioPorIngrediente == ing.nombre){
                             precio=precio+ing.precio;
                         } 
