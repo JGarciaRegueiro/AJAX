@@ -20,7 +20,7 @@ const RECURSO = "datos.json"
 
         //Se ejecutará si hay algún error
         xmlHttp.onerror = function(){
-            alert("ERROR FATAL MUERTE Y DESTRUCCÓN")
+            alert("ERRO")
         }
     }
 

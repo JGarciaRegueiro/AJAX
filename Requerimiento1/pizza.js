@@ -80,7 +80,6 @@ function procesarRespuesta(jsonDoc) {
             //Añadir el nodo Texto textoRadio como hijo del nodo Element labelRadio
             labelRadio.appendChild(textoRadio);
         }
-
     }
 
 var nombre = document.getElementById("nombre");
