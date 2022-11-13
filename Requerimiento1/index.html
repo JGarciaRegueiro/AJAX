@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>Pedir una pizza</title>
 </head>
+<!--Llamada a la función enviarPeticionAsincrona al cargar el body-->
 <body onload="enviarPeticionAsincrona()">
     <img src="img/logopizza.png" alt="logo_pizza">
     <!-- Comienzo del formulario. Dentro de la etiqueta <form>. 
@@ -37,6 +38,7 @@
         
         <!--Input type submit: "boton-entregar-enviar",el usuario hace click, realiza la petición al programa servidor especificado en action-->
         <input type="submit" value="Procesar el pedido" onclick="return calcularPrecio()">
+        <!--Llamada a la función enviarPeticionAsincrona al pulsar el botón refrescar-->
         <input type="submit" value="Refrescar" onclick="enviarPeticionAsincrona()">
     </form>
     <script type= "text/javascript" src="pizza.js"></script>
